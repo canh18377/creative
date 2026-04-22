@@ -842,3 +842,488 @@ body {
 }
 .info-section textarea:focus { border-color: var(--primary); }
 
+
+/* Customer App-like UI */
+.customer-page-bg {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.customer-page-bg .chat-container {
+  height: 100%;
+  max-height: 850px;
+  width: 100%;
+  max-width: 480px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.05);
+  overflow: hidden;
+  background: var(--surface-color);
+}
+
+.chat-footer-wrapper {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-color);
+  border-top: 1px solid var(--border-color);
+}
+
+.quick-replies-container {
+  display: flex;
+  gap: 10px;
+  padding: 12px 20px 4px 20px;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+}
+.quick-replies-container::-webkit-scrollbar {
+  display: none;
+}
+
+.quick-reply-btn {
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  color: #a5b4fc;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.quick-reply-btn:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.chat-input-area {
+  border-top: none; /* Removed because wrapper has it */
+}
+
+.btn-send.active {
+  background: var(--primary);
+}
+.btn-send:not(.active) {
+  background: var(--surface-hover);
+  color: var(--text-muted);
+}
+
+
+/* Customer Page Responsive Layout */
+.customer-layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .customer-layout-wrapper {
+    flex-direction: row;
+  }
+}
+
+.storefront-panel {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.storefront-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(255,255,255,0.02);
+}
+
+.storefront-header h2 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.storefront-header p {
+  color: var(--text-muted);
+}
+
+.storefront-products {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.storefront-product-card {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.storefront-product-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+}
+
+.storefront-product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.storefront-product-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.storefront-product-info h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.price-row {
+  margin-bottom: auto;
+}
+
+.price-row .price {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--success);
+}
+
+.review-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.chat-panel {
+  flex: 1;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 767px) {
+  .chat-panel {
+    max-width: 100%;
+    height: 500px; /* Fixed height on mobile for chat */
+  }
+}
+
+
+/* Fix Scrolling / Sticky Layout */
+.customer-page-bg {
+  height: auto;
+  min-height: 100vh;
+  align-items: flex-start;
+  padding-bottom: 40px;
+}
+
+.customer-layout-wrapper {
+  height: auto;
+}
+
+.storefront-panel {
+  overflow-y: visible;
+  height: auto;
+}
+
+.storefront-products {
+  overflow-y: visible;
+}
+
+@media (min-width: 768px) {
+  .chat-panel {
+    position: sticky;
+    top: 20px;
+    height: calc(100vh - 40px);
+  }
+}
+
+
+/* Mobile Priority for Chat Box */
+@media (max-width: 767px) {
+  .customer-layout-wrapper {
+    flex-direction: column-reverse;
+  }
+}
+
+
+/* Fix Alignment */
+.customer-layout-wrapper {
+  margin: 0 auto;
+}
+
+
+/* UI Fixes: Overflow and Small Items */
+body {
+  overflow-x: hidden;
+}
+
+.customer-page-bg {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px; /* less padding on mobile */
+  overflow-x: hidden;
+}
+
+.storefront-products {
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
+  gap: 16px !important;
+  padding: 16px !important;
+}
+
+.storefront-product-card img {
+  height: 140px !important;
+}
+
+.storefront-product-info {
+  padding: 12px !important;
+}
+
+.storefront-product-info h3 {
+  font-size: 0.95rem !important;
+}
+
+.price-row .price {
+  font-size: 1rem !important;
+}
+
+@media (min-width: 768px) {
+  .customer-page-bg {
+    padding: 20px;
+  }
+}
+
+
+/* FIX GLOBAL SCROLLING */
+html, body, #root {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+.customer-layout-wrapper {
+  overflow: visible !important;
+}
+
+
+/* Fix Cramped Product Card Info */
+.storefront-product-info {
+  padding: 12px 10px !important;
+}
+
+.price-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.price-row .price {
+  font-size: 0.95rem !important;
+}
+
+.price-row span[style*="line-through"] {
+  font-size: 0.75rem !important;
+  margin-left: 0 !important;
+}
+
+.review-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin: 8px 0 !important;
+  font-size: 0.75rem !important;
+}
+
+.review-row span {
+  white-space: nowrap;
+}
+
+.review-row button {
+  margin-left: 0 !important;
+  font-size: 0.75rem !important;
+  padding: 0;
+  margin-top: 4px;
+  width: 100%;
+  text-align: left;
+}
+
+
+/* FIX CHAT PANEL TO FIXED */
+@media (min-width: 768px) {
+  .customer-layout-wrapper {
+    position: relative;
+    display: block; /* remove flex since we are making chat fixed */
+  }
+  
+  .storefront-panel {
+    width: calc(100% - 420px); /* Leave space for the 400px fixed chat + 20px gap */
+    margin-right: 420px;
+  }
+  
+  .chat-panel {
+    position: fixed !important;
+    top: 20px;
+    right: max(20px, calc((100vw - 1200px) / 2 + 20px));
+    width: 400px;
+    height: calc(100vh - 40px);
+    z-index: 50;
+  }
+}
+
+
+/* MOBILE ONLY CHAT */
+@media (max-width: 767px) {
+  .storefront-panel {
+    display: none !important;
+  }
+  
+  .chat-panel {
+    height: calc(100vh - 40px) !important; /* Keep some padding if customer-page-bg has padding, or make it 100vh */
+    max-width: 100% !important;
+    border-radius: 16px !important;
+  }
+}
+
+
+/* PREMIUM UI UPGRADE */
+.customer-page-bg {
+  background: radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.15), transparent 35%),
+              radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.15), transparent 35%),
+              var(--bg-color);
+}
+
+.storefront-panel, .chat-panel {
+  background: rgba(15, 23, 42, 0.6) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.storefront-header {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.storefront-header button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.storefront-header button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.storefront-product-card {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.04) !important;
+  transition: all 0.3s ease !important;
+}
+
+.storefront-product-card:hover {
+  border-color: rgba(99, 102, 241, 0.4) !important;
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 30px -10px rgba(99, 102, 241, 0.25);
+}
+
+.review-row button {
+  color: #a5b4fc !important;
+  text-decoration: none !important;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.review-row button:hover {
+  text-decoration: underline !important;
+  color: #c7d2fe !important;
+}
+
+.btn-add-cart {
+  border-radius: 10px !important;
+  transition: all 0.2s;
+}
+
+.btn-add-cart:hover {
+  transform: scale(1.02);
+}
+
+.message-bot .message-content {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9)) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.message-user .message-content {
+  background: linear-gradient(135deg, var(--primary), #4f46e5) !important;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+}
+
+.chat-footer-wrapper {
+  background: transparent !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+  padding-bottom: 12px;
+}
+
+.chat-input-area {
+  background: rgba(255, 255, 255, 0.03) !important;
+  margin: 0 16px;
+  border-radius: 24px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  transition: border-color 0.3s;
+}
+
+.chat-input-area:focus-within {
+  border-color: var(--primary) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+

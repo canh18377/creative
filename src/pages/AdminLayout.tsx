@@ -16,13 +16,13 @@ export const mockAdminCustomers = [
 export const AdminLayout: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'chat' | 'products'>('chat');
   const [activeCustomer, setActiveCustomer] = useState(mockAdminCustomers[0]);
-  
+
   // Dummy messages for admin view
   const [messages, setMessages] = useState<Message[]>([
     { id: 'm1', sender: 'user', type: 'text', content: 'Cho mình hỏi về tai nghe Sony', timestamp: new Date() },
     { id: 'm2', sender: 'bot', type: 'text', content: 'Dạ shop chào bạn, bạn cần tư vấn dòng tai nghe nào ạ?', timestamp: new Date() }
   ]);
-  
+
   const [cartItems] = useState<CartItem[]>([]);
 
   const handleSendMessage = (content: string, products?: Product[]) => {
@@ -40,24 +40,24 @@ export const AdminLayout: React.FC = () => {
   return (
     <div className="admin-layout">
       <AdminSidebar activeTab={activeTab} onTabChange={setActiveTab} />
-      
+
       {activeTab === 'dashboard' && <AdminDashboard />}
       {activeTab === 'products' && <AdminProducts />}
       {activeTab === 'chat' && (
         <>
-          <AdminChatList 
-            customers={mockAdminCustomers} 
-            activeId={activeCustomer.id} 
-            onSelect={setActiveCustomer} 
+          <AdminChatList
+            customers={mockAdminCustomers}
+            activeId={activeCustomer.id}
+            onSelect={setActiveCustomer}
           />
-          <AdminChatWindow 
-            customer={activeCustomer} 
-            messages={messages} 
-            onSendMessage={handleSendMessage} 
+          <AdminChatWindow
+            customer={activeCustomer}
+            messages={messages}
+            onSendMessage={handleSendMessage}
           />
-          <AdminCustomerInfo 
-            customer={activeCustomer} 
-            cartItems={cartItems} 
+          <AdminCustomerInfo
+            customer={activeCustomer}
+            cartItems={cartItems}
           />
         </>
       )}

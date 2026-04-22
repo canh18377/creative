@@ -1,3 +1,11 @@
+export interface Review {
+  id: string;
+  user: string;
+  rating: number;
+  comment: string;
+  date: string;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -7,6 +15,7 @@ export interface Product {
   rating: number;
   reviewCount: number;
   description: string;
+  reviews?: Review[];
 }
 
 export interface Message {
