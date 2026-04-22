@@ -38,8 +38,8 @@ export const AdminProducts: React.FC = () => {
   };
 
   return (
-    <div style={{ flex: 1, padding: '30px', background: 'rgba(15,23,42,0.8)', overflowY: 'auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+    <div style={{ flex: 1, padding: '20px', background: 'var(--bg-color)', overflowY: 'auto' }}>
+      <div className="admin-page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
         <h2 style={{ fontSize: '1.5rem' }}>Quản lý Sản phẩm</h2>
         <button 
           onClick={() => setIsAdding(!isAdding)}
@@ -56,7 +56,7 @@ export const AdminProducts: React.FC = () => {
       {isAdding && (
         <div className="glass" style={{ padding: '24px', borderRadius: '12px', marginBottom: '24px' }}>
           <h3 style={{ marginBottom: '16px', fontSize: '1.1rem' }}>Thêm sản phẩm mới</h3>
-          <form onSubmit={handleAddProduct} style={{ display: 'flex', gap: '16px', alignItems: 'flex-end' }}>
+          <form className="admin-product-form" onSubmit={handleAddProduct}>
             <div style={{ flex: 2, display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <label style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Tên sản phẩm</label>
               <input 
@@ -97,7 +97,7 @@ export const AdminProducts: React.FC = () => {
         </div>
       )}
 
-      <div className="glass" style={{ borderRadius: '12px', overflow: 'hidden' }}>
+      <div className="glass admin-table-container" style={{ borderRadius: '12px' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
           <thead>
             <tr style={{ borderBottom: '1px solid var(--border-color)', background: 'rgba(255,255,255,0.02)' }}>

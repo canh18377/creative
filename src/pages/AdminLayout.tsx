@@ -16,6 +16,17 @@ export const mockAdminCustomers = [
 export const AdminLayout: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'chat' | 'products'>('chat');
   const [activeCustomer, setActiveCustomer] = useState(mockAdminCustomers[0]);
+  const [mobileChatView, setMobileChatView] = useState<'list' | 'detail'>('list');
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1024) {
+        setMobileChatView('list');
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Dummy messages for admin view
   const [messages, setMessages] = useState<Message[]>([
@@ -37,28 +48,48 @@ export const AdminLayout: React.FC = () => {
     setMessages(prev => [...prev, newMsg]);
   };
 
+  const handleSelectCustomer = (customer: typeof mockAdminCustomers[0]) => {
+    setActiveCustomer(customer);
+    if (window.innerWidth <= 1024) {
+      setMobileChatView('detail');
+    }
+  };
+
   return (
-    <div className="admin-layout">
+    <div className={`admin-layout ${activeTab === 'chat' && mobileChatView === 'detail' ? 'mobile-detail-active' : ''}`}>
       <AdminSidebar activeTab={activeTab} onTabChange={setActiveTab} />
 
       {activeTab === 'dashboard' && <AdminDashboard />}
       {activeTab === 'products' && <AdminProducts />}
       {activeTab === 'chat' && (
         <>
-          <AdminChatList
-            customers={mockAdminCustomers}
-            activeId={activeCustomer.id}
-            onSelect={setActiveCustomer}
-          />
-          <AdminChatWindow
-            customer={activeCustomer}
-            messages={messages}
-            onSendMessage={handleSendMessage}
-          />
-          <AdminCustomerInfo
-            customer={activeCustomer}
-            cartItems={cartItems}
-          />
+          <div className={`admin-chat-list-container ${mobileChatView === 'detail' ? 'mobile-hidden' : ''}`}>
+            <AdminChatList
+              customers={mockAdminCustomers}
+              activeId={activeCustomer.id}
+              onSelect={handleSelectCustomer}
+            />
+          </div>
+
+          <div className={`admin-chat-main-container ${mobileChatView === 'list' ? 'mobile-hidden' : ''}`}>
+            <div className="mobile-back-header">
+              <button onClick={() => setMobileChatView('list')}>
+                ← Danh sách tin nhắn
+              </button>
+            </div>
+            <AdminChatWindow
+              customer={activeCustomer}
+              messages={messages}
+              onSendMessage={handleSendMessage}
+            />
+          </div>
+
+          <div className={`admin-chat-info-container ${mobileChatView === 'list' ? 'mobile-hidden' : ''}`}>
+            <AdminCustomerInfo
+              customer={activeCustomer}
+              cartItems={cartItems}
+            />
+          </div>
         </>
       )}
     </div>

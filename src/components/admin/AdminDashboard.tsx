@@ -8,7 +8,7 @@ export const AdminDashboard: React.FC = () => {
       <h2 style={{ marginBottom: '24px', fontSize: '1.5rem' }}>Tổng quan Thống kê</h2>
       
       {/* Chỉ số chính */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginBottom: '40px' }}>
+      <div className="admin-stats-grid">
         <div className="glass" style={{ padding: '20px', borderRadius: '12px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px', color: 'var(--text-muted)' }}>
             <TrendingUp size={20} color="var(--primary)" />
@@ -42,7 +42,7 @@ export const AdminDashboard: React.FC = () => {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+      <div className="admin-charts-grid">
         {/* Thống kê đánh giá sản phẩm */}
         <div className="glass" style={{ padding: '20px', borderRadius: '12px' }}>
           <h3 style={{ marginBottom: '20px', fontSize: '1.1rem' }}>Thống kê Đánh giá Sản phẩm</h3>
