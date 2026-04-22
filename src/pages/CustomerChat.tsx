@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, ShoppingBag, Bot } from 'lucide-react';
+import { Send, ShoppingBag, Bot, X } from 'lucide-react';
 import { MessageBubble } from '../components/MessageBubble';
 import { CartDrawer } from '../components/CartDrawer';
 import { ReviewModal } from '../components/ReviewModal';
@@ -27,6 +27,7 @@ const CustomerChat: React.FC = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedProductReview, setSelectedProductReview] = useState<Product | null>(null);
   const [priceFilter, setPriceFilter] = useState<'all' | 'under2m' | '2m-to-5m' | 'over5m'>('all');
+  const [isMobileChatOpen, setIsMobileChatOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -107,6 +108,7 @@ const CustomerChat: React.FC = () => {
 
   const handleAskAdvice = (productName: string) => {
     sendUserMessage(`Tư vấn cho mình sản phẩm: ${productName}`);
+    setIsMobileChatOpen(true);
   };
 
   const handleAddToCart = (product: Product) => {
@@ -251,7 +253,7 @@ const CustomerChat: React.FC = () => {
         </div>
 
         {/* Right Side: Chat Box */}
-        <div className="chat-panel glass">
+        <div className={`chat-panel glass ${isMobileChatOpen ? 'mobile-open' : 'mobile-closed'}`}>
           {/* Header */}
           <header className="chat-header">
             <div className="flex items-center gap-2">
@@ -262,10 +264,20 @@ const CustomerChat: React.FC = () => {
               </div>
             </div>
             
-            <button className="cart-icon-wrapper cursor-pointer" onClick={() => setIsCartOpen(true)} style={{ background: 'none', border: 'none', color: 'white' }}>
-              <ShoppingBag size={28} />
-              {totalCartItems > 0 && <span className="cart-badge">{totalCartItems}</span>}
-            </button>
+            <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+              <button className="cart-icon-wrapper cursor-pointer" onClick={() => setIsCartOpen(true)} style={{ background: 'none', border: 'none', color: 'white' }}>
+                <ShoppingBag size={28} />
+                {totalCartItems > 0 && <span className="cart-badge">{totalCartItems}</span>}
+              </button>
+              
+              <button 
+                className="mobile-close-chat" 
+                onClick={() => setIsMobileChatOpen(false)}
+                style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}
+              >
+                <X size={28} />
+              </button>
+            </div>
           </header>
 
           {/* Message Area */}
@@ -323,6 +335,17 @@ const CustomerChat: React.FC = () => {
         isOpen={!!selectedProductReview}
         onClose={() => setSelectedProductReview(null)}
       />
+
+      {/* Mobile Chat FAB */}
+      {!isMobileChatOpen && (
+        <button 
+          className="mobile-chat-fab"
+          onClick={() => setIsMobileChatOpen(true)}
+        >
+          <Bot size={32} />
+          <span className="fab-badge">1</span>
+        </button>
+      )}
     </div>
   );
 };

@@ -1327,3 +1327,154 @@ html, body, #root {
   background: rgba(255, 255, 255, 0.2);
 }
 
+
+/* === MOBILE UI REVAMP === */
+@media (max-width: 767px) {
+  .customer-page-bg {
+    padding: 0 !important;
+  }
+
+  .customer-layout-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+
+  /* Restore Storefront */
+  .storefront-panel {
+    display: flex !important;
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Make Chat panel half-screen and stick to top initially */
+  .chat-panel {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 55vh !important;
+    top: 0 !important;
+    right: 0 !important;
+    border-radius: 0 0 24px 24px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+    z-index: 10 !important;
+    margin-bottom: 10px;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
+
+  /* Make products 2 columns on mobile */
+  .storefront-products {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    padding: 10px !important;
+    overflow: visible !important;
+  }
+
+  .storefront-product-card img {
+    height: 100px !important;
+  }
+
+  .storefront-product-info {
+    padding: 10px 8px !important;
+  }
+
+  .storefront-header {
+    padding: 16px 12px !important;
+  }
+
+  .storefront-header h2 {
+    font-size: 1.2rem !important;
+  }
+
+  /* Adjust buttons for tiny screens */
+  .btn-add-cart {
+    font-size: 0.75rem !important;
+    padding: 6px 4px !important;
+  }
+}
+
+
+/* === MOBILE CHAT POPUP (FAB) === */
+.mobile-chat-fab {
+  display: none;
+}
+.mobile-close-chat {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .mobile-chat-fab {
+    display: flex;
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary), #4f46e5);
+    border-radius: 50%;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    box-shadow: 0 10px 25px rgba(79, 70, 229, 0.5);
+    z-index: 90;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .mobile-chat-fab:active {
+    transform: scale(0.9);
+  }
+
+  .fab-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #ef4444;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 2px 6px;
+    border: 2px solid var(--bg-color);
+  }
+
+  .mobile-close-chat {
+    display: block;
+  }
+
+  .chat-panel.mobile-closed {
+    display: none !important;
+  }
+
+  .chat-panel.mobile-open {
+    display: flex !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    width: 100% !important;
+    height: 85vh !important;
+    border-radius: 24px 24px 0 0 !important;
+    z-index: 100 !important;
+    animation: slideUp 0.3s ease-out forwards;
+    margin: 0 !important;
+    border-bottom: none !important;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+}
+
